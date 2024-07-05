@@ -2,6 +2,14 @@
 @import "abstracts/variables";
 @import "abstracts/mixins";
 
+html {
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   font-family: "Montserrat", sans-serif;
   margin: 0;
@@ -10,11 +18,40 @@ body {
   overflow-x: hidden;
 }
 
-.container {
-  width: 100%;
-  margin: 0 auto;
-  gap: 3rem;
+
+a {
+  position: relative;
+  text-decoration: none;
+  color: #aaa;
+  font-size: 14px;
+  margin: 5px 0;
+
+  &:hover::before {
+    content: "";
+    display: inline-block;
+    width: 30px;
+    height: 2px;
+    background-color: #B29D75;
+    position: absolute;
+    left: -50%; /* Adjust the value to position the dash correctly */
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &:hover::after {
+    position: absolute;
+    content: "";
+    display: inline-block;
+    height: 4px;
+    width: 4px;
+    border-radius: 50%;
+    background-color: #B29D75;
+    right: -15%; /* Adjust the value to position the dash correctly */
+    top: 40%;
+  }
 }
+
+
 
 .header {
   position: relative;
@@ -28,7 +65,9 @@ body {
   align-items: center;
   gap: 4rem;
   z-index: 999;
-
+  @media screen and (max-width: 767px) {
+    align-items: flex-start;
+  }
   .logo {
     position: relative;
     z-index: 999;
@@ -83,20 +122,77 @@ body {
         }
       }
     }
+
     @media screen and (max-width: 767px) {
-      display: none;
+      ul {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        background-color: #fff;
+        margin-top: 50%;
+        margin-left: 60%;
+        padding: 16px 24px;
+      }
+      ul.active {
+        display: flex;
+      }
     }
   }
+
   .nav-mobile {
     display: none;
     position: absolute;
     top: 0;
-    right: 0;
-    background: #fff;
+    right: 10%;
+    background: transparent;
     height: 70px;
     width: 70px;
+    @media screen and (max-width: 767px) {
+      display: block;
+    }
+  }
+
+  #nav-toggle {
+    position: absolute;
+    left: 18px;
+    top: 22px;
+    cursor: pointer;
+    padding: 10px 35px 16px 0px;
+    span,
+    span:before,
+    span:after {
+      cursor: pointer;
+      border-radius: 1px;
+      height: 5px;
+      width: 35px;
+      background: #b29d75;
+      position: absolute;
+      display: block;
+      content: '';
+      transition: all 300ms ease-in-out;
+    }
+    span:before {
+      top: -10px;
+    }
+    span:after {
+      bottom: -10px;
+    }
+    &.active span {
+      background-color: transparent;
+      &:before,
+      &:after {
+        top: 0;
+      }
+      &:before {
+        transform: rotate(45deg);
+      }
+      &:after {
+        transform: rotate(-45deg);
+      }
+    }
   }
 }
+
 
 .vertical-nav {
   position: fixed;
@@ -143,12 +239,6 @@ body {
     align-items: center;
     margin: 10px 0;
 
-    a {
-      text-decoration: none;
-      color: #aaa;
-      font-size: 16px;
-      margin: 5px 0;
-    }
   }
   @media screen and (max-width: 767px) {
     display: none;
@@ -161,7 +251,7 @@ body {
   position: relative;
   display: flex;
   width: 100%;
-  height: 80vh;
+  height: 100vh;
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -169,21 +259,19 @@ body {
     content: "";
     position: absolute;
     background: url("/scss/images/home-slider-slide-3.png") no-repeat;
-    background-size: contain; /* Ensure the image covers the element */
-    height: 150%;
-    width: 100%; /* Ensure the width covers the element */
+    height: 100%;
+    width: 100%; 
     background-position: right;
-    background-size: 65% auto;
+    background-size: contain;
+    background-size: 65% 100%;
     z-index: -1; /* Send it to the background */
     @media screen and (max-width: 767px) {
-      background-size: 100% auto;
-      background-position: center;
+      background-size: auto 50%;
+      background-position: bottom 20% right 0;
     }
   }
   &__container {
     width: 65%;
-    margin: 0;
-    padding: 0;
     display: flex;
     flex-direction: column;
     justify-content: start;
@@ -198,8 +286,10 @@ body {
     }
     @media screen and (max-width: 767px) {
       width: 100%;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
+      height: 100%;
+      padding-top: 50%;
       h1 {
         font-size: 1rem;
         letter-spacing: 0.3rem;
@@ -260,11 +350,19 @@ body {
   background-color: #fff;
   @media screen and (max-width: 767px) {
     flex-direction: column;
-    height: auto;
+    height: 100vh;
+    gap: 2rem;
   }
 }
 
-#section2 {
+  
+#voyager {
+    @media screen and (max-width: 767px) {
+      flex-direction: column-reverse;
+    }
+  }
+
+#drifter {
   background-color: #ededed;
 }
 
@@ -348,7 +446,7 @@ body {
   display: flex;
   width: 600px;
   position: absolute;
-  border: 2px solid #ccc;
+  border: 2px solid #b8a47e;
   padding: 2em;
   z-index: 10;
   &__right {
@@ -389,24 +487,38 @@ body {
 
 .arrow-down {
   position: absolute;
-  bottom: -20px;
-  width: 30px;
-  height: 60px;
-  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: -40%;
+  width: 150px;
+  height: 100px;
   transform: translateX(-50%);
-  @media screen and (max-width: 767px) {
-    bottom: -10px;
-    width: 20px;
-    height: 40px;
+  &__top {
+    left: 60%;
+    background-color: #fff;
   }
-}
-
-.arrow-down span {
-  font-size: 5em;
-  line-height: 2em;
-  color: #333;
+  &__bottom {
+    left: 30%;
+    background-color: #ededed;
+  }
+  img {
+    height: 80px;
+    width: auto;
+  }
   @media screen and (max-width: 767px) {
-    font-size: 3em;
+    bottom: -25%;
+    width: 60px;
+    height: 60px;
+    img {
+      height: 30px;
+    }
+    &__top {
+      left: 50%;
+    }
+    &__bottom {
+      left: 50%;
+    }
   }
 }
 
@@ -466,7 +578,7 @@ body {
 .item-wrapper {
   display: flex;
   width: 100%;
-  max-width: 1366px;
+  max-width: 1200px;
   margin: 0 auto;
   @media screen and (max-width: 767px) {
     flex-direction: column;
@@ -552,13 +664,14 @@ body {
     margin: 0 auto;
   }
   h4 {
-    font-size: 1.5em;
+    font-size: 1.3em;
     line-height: 0.8em;
     font-weight: 800;
     color: #333;
+    width: 100%;
   }
   .item-images {
-    margin-top: -5%;
+    margin-top: -10%;
   }
   .item-description {
     margin-top: 30%;
@@ -599,6 +712,7 @@ body {
     }
   }
   @media screen and (max-width: 767px) {
+    margin-left: 0;
     margin: 0 auto;
     .item-description {
       margin: 0 auto;
@@ -610,15 +724,16 @@ body {
 }
 
 #item4 {
-  max-width: 1366px;
+  max-width: 1200px;
   margin: 0 auto;
-  margin-top: -8%;
+  margin-top: -12%;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   @media screen and (max-width: 767px) {
     flex-direction: column-reverse;
+    margin-top: 0;
   }
   .item-description {
     position: relative;
@@ -626,7 +741,7 @@ body {
       position: absolute;
       width: 100px;
       top: -120%;
-      left: 35%;
+      left: 25%;
       font-size: 3em;
       text-transform: uppercase;
       font-weight: 800;
@@ -634,9 +749,11 @@ body {
       text-shadow: 0 10px 15px #999;
       color: #ffffff;
       @media screen and (max-width: 767px) {
+        width: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
+        top: 0;
         left: 0;
         margin: 0 auto;
         font-size: 2em;
@@ -645,7 +762,6 @@ body {
   }
   h3 {
     z-index: 1;
-    margin: 0;
     margin-bottom: -32px;
     font-size: 2.5em;
     color: #777;
@@ -659,6 +775,7 @@ body {
     img {
       z-index: -1;
     }
+    
   }
 }
 
@@ -670,15 +787,50 @@ body {
   margin: 0 auto;
   align-items: end;
   @media (max-width: 768px) {
-    grid-template-columns: repeat(2,auto);
+    grid-template-columns: repeat(2, auto);
     padding: 0 10px;
     width: 100%;
     row-gap: 16px;
   }
+
   img {
     width: 150px;
     height: 150px;
+    position: relative; 
+    &:hover {
+      cursor: pointer;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 150px;
+      height: 150px;
+      background-color: rgba(0, 0, 0, 0.5); 
+      opacity: 0;
+      transition: opacity 0.3s; 
+    }
+
+    &::after {
+      content: '+';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 2rem;
+      opacity: 0;
+      transition: opacity 0.3s; // Smooth transition effect
+    }
+
+    &:hover::before,
+    &:hover::after {
+      opacity: 1;
+    }
   }
+
   .deco-end {
     position: relative;
     width: 200px;
@@ -726,6 +878,7 @@ body {
     margin-top: 2em;
     .dash2 {
       @include dash(2px, 120px);
+      z-index: 10;
     }
     img {
       width: 100px;
@@ -735,6 +888,7 @@ body {
   }
   .read-more {
     padding: 0.5em 0;
+    cursor: pointer;
   }
 }
 
@@ -753,22 +907,6 @@ body {
   margin: 0.5em 0;
 }
 
-.footer {
-  margin-top: 2em;
-}
-
-.footer-images {
-  display: flex;
-  gap: 1em;
-  justify-content: center;
-}
-
-.footer-images img {
-  width: 100px;
-  height: auto;
-  object-fit: cover;
-}
-
 @media (max-width: 768px) {
   .item {
     flex-direction: column;
@@ -782,6 +920,8 @@ body {
 
 
 footer {
+  font-family: "Montserrat", sans-serif;
+  margin: 0 auto;
   width: 100%;
   background-color: #f5f5f5;
 }
@@ -799,6 +939,7 @@ footer {
   color: #8a8a8a;
   @media (max-width: 768px) {
     padding: 30px 10px;
+    width: 100%;
   }
   .footer-top {
     display: flex;
@@ -826,6 +967,7 @@ footer {
 
 .footer-nav ul {
   display: flex;
+  gap: 16px;
   list-style-type: none;
   padding: 0;
 }
@@ -846,31 +988,31 @@ footer {
 
 .newsletter {
   max-width: 300px;
+  form {
+    display: flex;
+  }
+  input {
+    flex-grow: 1;
+    padding: 5px;
+  }
+  button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+  }
 }
 
-.newsletter form {
-  display: flex;
-}
-
-.newsletter input {
-  flex-grow: 1;
-  padding: 5px;
-}
-
-.newsletter button {
-  background-color: #333;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-}
 
 .social-links {
   display: flex;
   justify-content: center;
+  gap: 16px;
+  margin-left: 5%;
+  a {
+    margin: 0 10px;
+    color: #333;
+    text-decoration: none;
+  }
 }
 
-.social-links a {
-  margin: 0 10px;
-  color: #333;
-  text-decoration: none;
-}

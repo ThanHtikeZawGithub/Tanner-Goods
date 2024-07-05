@@ -10,6 +10,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
     rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="/scss/js/navbar.js"></script>
 </head>
 
 <body>
@@ -21,11 +23,14 @@
     <nav class="nav">
       <ul>
         <li><a href="#">Navy Salt</a></li>
-        <li><a href="#">Voyager</a></li>
-        <li><a href="#">Drifter</a></li>
-        <li><a href="#">Collection</a></li>
+        <li><a href="#voyager">Voyager</a></li>
+        <li><a href="#drifter">Drifter</a></li>
+        <li><a href="#collection">Collection</a></li>
         <li><a href="#">Contact</a></li>
       </ul>
+      <div class="nav-mobile">
+        <a id="nav-toggle" href="#!"><span></span></a>
+      </div>
     </nav>
     <nav class="vertical-nav">
       <div class="nav-arrow up"></div>
@@ -38,9 +43,6 @@
         <a href="#section4">05</a>
       </div>
     </nav>
-    <div class="nav-mobile">
-      <a id="nav-toggle" href="#!"><span></span></a>
-    </div>
   </header>
 
   <section class="hero">
@@ -57,7 +59,7 @@
     </div>
   </section>
 
-  <section class="voyager-container" id="section1">
+  <section class="voyager-container" id="voyager">
     <div class="image-section">
       <img src="/scss/images/Слой 8.png" alt="Voyager Daypack">
       <div class="text-overlay text-overlay__left">
@@ -70,25 +72,25 @@
         <p>Whether you're stomping around outdoors or traversing the city, our Voyager Daypack was designed to be
           adaptable in all environments. Compact, lightweight and comfortable for people of all sizes, this silhouette
           is versatile enough.</p>
-        <div class="arrow-down">
-          <span>&#8595;</span>
+        <div class="arrow-down arrow-down__top">
+          <img src="/scss/images/Forma 1 копия 5.png" alt="Voyager Daypack">
         </div>
       </div>
     </div>
   </section>
-  <section class="voyager-container" id="section2">
+  <section class="voyager-container" id="drifter">
     <div class="description-section">
       <div class="description-box description-box__left">
         <p>Field-tested from the peaks of the Cascades down to the desert floor of Joshua Tree, the Wilderness Rucksack
           was built to put on some serious miles for years to come.A comfortable, dependable combination of 14oz Salt &
           Pepper canvas, premium wool felt and Cambara English bridle leather.</p>
-        <div class="arrow-down">
-          <span>&darr;</span>
+        <div class="arrow-down arrow-down__bottom">
+          <img src="/scss/images/Forma 1 копия 5.png" alt="Voyager Daypack">
         </div>
       </div>
     </div>
     <div class="image-section">
-      <img src="/scss/images/Слой 8.png" alt="Voyager Daypack">
+      <img src="/scss/images/Слой 12.png" alt="Voyager Daypack">
       <div class="text-overlay text-overlay__right">
         <h1>DRIFTER DOPP KIT</h1>
         <h3>NAVY SALT & PEPPER</h3>
@@ -96,7 +98,7 @@
     </div>
   </section>
 
-  <section class="collection">
+  <section class="collection" id="collection">
     <div class="collection__title">
       <h1>TANNER COLLECTIONS</h1>
       <div class="collection__subtitle">
@@ -147,7 +149,7 @@
     <div class="item" id="item3">
       <div class="item-images">
         <h3>02</h3>
-        <img src="/scss/images/Слой 19.png" alt="Voyager Daypack">
+        <img src="/scss/images/Слой 19.png" alt="Field Camera Bag">
       </div>
       <div class="item-description">
         <h4>FIELD CAMERA BAG</h4>
@@ -164,19 +166,19 @@
       </div>
       <div class="item-images">
         <h3>03</h3>
-        <img src="/scss/images/Слой 18.png" alt="Voyager Daypack">
+        <img src="/scss/images/Слой 18.png" alt="Voyager daypack">
       </div>
     </div>
 
     <div class="item-collection">
-      <img src="/scss/images/Слой 25.png" alt="Voyager Daypack">
-      <img src="/scss/images/Слой 25.png" alt="Voyager Daypack">
-      <img src="/scss/images/Слой 25.png" alt="Voyager Daypack">
-      <img src="/scss/images/Слой 25.png" alt="Voyager Daypack">
-      <img src="/scss/images/Слой 25.png" alt="Voyager Daypack">
-      <img src="/scss/images/Слой 25.png" alt="Voyager Daypack">
+      <img src="/scss/images/Слой 25.png" alt="item 1">
+      <img src="/scss/images/Слой 26.png" alt="item 2">
+      <img src="/scss/images/Слой 24.png" alt="item 3">
+      <img src="/scss/images/Слой 22.png" alt="item 4">
+      <img src="/scss/images/Слой 27.png" alt="item 5">
+      <img src="/scss/images/Слой 27.png" alt="item 6">
       <div class="deco-end">
-        <img src="/scss/images/Прямоугольник 9.png" class="deco-img" alt="Voyager Daypack">
+        <img src="/scss/images/Прямоугольник 9.png" class="deco-img" alt="decoration">
       </div>
     </div>
   </section>

@@ -1,0 +1,26 @@
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  @mixin responsive {
+    @media (max-width: 768px) {
+      @content;
+    }
+  }
+
+  @mixin dash($width, $height) {
+    display: inline-block;
+    width: $width;
+    height: $height;
+    background-color: #B29D75;
+    margin-right: 10px;
+  }
+
+  @mixin responsive($size) {
+    $query: map-get($breakpoints, $size);
+    @media (min-width: $query) {
+    @content;
+    }
+  }

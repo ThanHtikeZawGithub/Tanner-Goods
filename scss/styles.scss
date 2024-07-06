@@ -29,7 +29,7 @@ body {
   padding: 20px;
   display: flex;
   align-items: center;
-  gap: 4rem;
+  gap: 5rem;
   z-index: 999;
   @media screen and (max-width: 767px) {
     align-items: flex-start;
@@ -71,7 +71,7 @@ body {
       text-transform: uppercase;
       font-weight: 700;
       font-size: 0.8em;
-      gap: 48px;
+      gap: 2rem;
       margin: 0;
       padding: 0;
       display: flex;
@@ -164,10 +164,11 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 
   .nav-arrow {
-    width: 16px;
-    height: 16px;
+    width: 10px;
+    height: 10px;
     border-left: 2px solid #b29a71; // Arrow color
     border-bottom: 2px solid #b29a71;
     margin: 10px 0;
@@ -181,26 +182,32 @@ body {
     }
   }
 
+  .dash {
+    @include dash(2px, 20px);
+    margin: 0.5rem auto 1rem;
+    
+  }
+
    .nav-links {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0;
+    gap: 12px;
 
     .nav-link {
       text-decoration: none;
       color: #333;
-      padding: 10px;
       transition: all 0.3s ease;
       font-weight: 700;
 
       &.active {
-        width: 50px;
-        height: 50px;
+        width: 60px;
+        height: 60px;
         background-color: #fff;
         border-radius: 50%;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         display: flex;
+        margin: 10px auto;
         justify-content: center;
         align-items: center;
         font-size: 32px;
@@ -267,12 +274,13 @@ body {
   }
 
   p {
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: #333;
     font-weight: 700;
   }
 
   .button-container {
+    margin-left: 10%;
     .gear-up-button {
       display: inline-flex;
       align-items: center;
@@ -752,8 +760,9 @@ body {
   grid-template-columns: repeat(7, auto);
   width: 100%;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 64px auto;
   align-items: end;
+  column-gap: 24px;
   @media (max-width: 768px) {
     grid-template-columns: repeat(2, auto);
     padding: 0 10px;
@@ -806,8 +815,8 @@ body {
         background-color: transparent;
         color: white;
         font-size: 2em;
-        border: 4px solid #fff;
-        padding: 8px 16px;
+        border: 2px solid #fff;
+        padding: 4px 12px;
         border-radius: 100%;
       }
     }

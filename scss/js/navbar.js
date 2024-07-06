@@ -1,3 +1,4 @@
+// for mobile nav bar
 ;(function($) {
   $(function() {
     $('#nav-toggle').click(function() {
@@ -15,6 +16,9 @@
     });
   });
 })(jQuery);
+
+
+// for vertical side navigation bar
 
 document.addEventListener('DOMContentLoaded', function() {
   const navLinks = document.querySelectorAll('.nav-link');
@@ -39,3 +43,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+
+document.addEventListener('scroll', function() {
+  const header = document.querySelector('.header');
+  if (window.scrollY > 50) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+});
+

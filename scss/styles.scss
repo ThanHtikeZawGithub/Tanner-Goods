@@ -19,40 +19,6 @@ body {
 }
 
 
-a {
-  position: relative;
-  text-decoration: none;
-  color: #aaa;
-  font-size: 14px;
-  margin: 5px 0;
-
-  &:hover::before {
-    content: "";
-    display: inline-block;
-    width: 30px;
-    height: 2px;
-    background-color: #B29D75;
-    position: absolute;
-    left: -50%; /* Adjust the value to position the dash correctly */
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  &:hover::after {
-    position: absolute;
-    content: "";
-    display: inline-block;
-    height: 4px;
-    width: 4px;
-    border-radius: 50%;
-    background-color: #B29D75;
-    right: -15%; /* Adjust the value to position the dash correctly */
-    top: 40%;
-  }
-}
-
-
-
 .header {
   position: relative;
   max-width: 1200px;
@@ -115,10 +81,7 @@ a {
         a {
           text-decoration: none;
           color: #333;
-
-          &:hover {
-            color: #000;
-          }
+          @include hover_effect();
         }
       }
     }
@@ -201,7 +164,6 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: Arial, sans-serif;
 
   .nav-arrow {
     width: 16px;
@@ -219,26 +181,33 @@ a {
     }
   }
 
-  .nav-circle {
-    width: 50px;
-    height: 50px;
-    background-color: #fff;
-    border-radius: 50%;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 18px;
-    color: #000;
-    margin: 10px 0;
-  }
-
-  .nav-links {
+   .nav-links {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 10px 0;
+    gap: 0;
 
+    .nav-link {
+      text-decoration: none;
+      color: #333;
+      padding: 10px;
+      transition: all 0.3s ease;
+      font-weight: 700;
+
+      &.active {
+        width: 50px;
+        height: 50px;
+        background-color: #fff;
+        border-radius: 50%;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 32px;
+        color: #000;
+        font-weight: bold;
+      }
+    }
   }
   @media screen and (max-width: 767px) {
     display: none;
@@ -528,7 +497,6 @@ a {
   display: flex;
   width: 100%;
   flex-direction: column;
-  padding: 64px 0;
   gap: 2em;
   &__title {
     width: 100%;
@@ -792,42 +760,56 @@ a {
     width: 100%;
     row-gap: 16px;
   }
-
-  img {
-    width: 150px;
-    height: 150px;
-    position: relative; 
+  
+  &__items {
+    position: relative;
     &:hover {
-      cursor: pointer;
+      &::backdrop {
+        background-color: #333;
+      }
+      .middle {
+        opacity: 1;
+      }
     }
 
-    &::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
+    img {
       width: 150px;
       height: 150px;
-      background-color: rgba(0, 0, 0, 0.5); 
-      opacity: 0;
-      transition: opacity 0.3s; 
+      opacity: 1;
+      display: block;
+      width: 100%;
+      height: auto;
+      transition: .5s ease;
+      backface-visibility: hidden;
     }
 
-    &::after {
-      content: '+';
+    .middle {
+      transition: .5s ease;
+      opacity: 0;
       position: absolute;
+      width: 100%;
+      height: 100%;
       top: 50%;
       left: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(0, 0, 0, 0.5);
       transform: translate(-50%, -50%);
-      color: white;
-      font-size: 2rem;
-      opacity: 0;
-      transition: opacity 0.3s; // Smooth transition effect
-    }
+      -ms-transform: translate(-50%, -50%);
+      text-align: center;
 
-    &:hover::before,
-    &:hover::after {
-      opacity: 1;
+      &::before {
+        top: 50%;
+        left: 50%;
+        content: '+';
+        background-color: transparent;
+        color: white;
+        font-size: 2em;
+        border: 4px solid #fff;
+        padding: 8px 16px;
+        border-radius: 100%;
+      }
     }
   }
 
@@ -835,9 +817,11 @@ a {
     position: relative;
     width: 200px;
     height: auto;
+
     @media (max-width: 768px) {
       display: none;
     }
+
     .deco-img {
       z-index: -2;
       position: absolute;
@@ -867,25 +851,30 @@ a {
   flex: 1 1 40%;
   padding: 1em;
   box-sizing: border-box;
+
   span {
     @include dash(2px, 60px);
   }
+
   .logo2 {
     display: flex;
     align-items: start;
     width: 100%;
     height: auto;
     margin-top: 2em;
+
     .dash2 {
       @include dash(2px, 120px);
       z-index: 10;
     }
+
     img {
       width: 100px;
       height: auto;
       object-fit: contain;
     }
   }
+
   .read-more {
     padding: 0.5em 0;
     cursor: pointer;
@@ -917,6 +906,7 @@ a {
     flex: 1 1 100%;
   }
 }
+
 
 
 footer {
@@ -979,6 +969,7 @@ footer {
 .footer-nav a {
   text-decoration: none;
   color: #333;
+  @include hover_effect();
 }
 
 .address,
@@ -1013,6 +1004,7 @@ footer {
     margin: 0 10px;
     color: #333;
     text-decoration: none;
+    @include hover_effect();
   }
 }
 
